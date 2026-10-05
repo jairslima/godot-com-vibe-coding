@@ -1,16 +1,25 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://src/levels/level_01.gd" id="1_level_script"]
 [ext_resource type="PackedScene" path="res://src/entities/player/player.tscn" id="2_player_scene"]
+[ext_resource type="Script" path="res://src/components/hazard_area.gd" id="3_hazard_script"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
 size = Vector2(1280, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_platform"]
+size = Vector2(250, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hazard"]
+size = Vector2(2000, 64)
 
 [node name="Level01" type="Node2D"]
 script = ExtResource("1_level_script")
 
 [node name="ChaoEstatico" type="StaticBody2D" parent="."]
 position = Vector2(640, 600)
+collision_layer = 1
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ChaoEstatico"]
 shape = SubResource("RectangleShape2D_ground")
@@ -22,8 +31,29 @@ offset_right = 640.0
 offset_bottom = 32.0
 color = Color(0.18, 0.38, 0.22, 1)
 
-[node name="Player" parent="." instance=ExtResource("2_player_scene")]
-position = Vector2(640, 400)
+[node name="PlataformaElevada" type="StaticBody2D" parent="."]
+position = Vector2(850, 480)
+collision_layer = 1
+collision_mask = 0
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(640, 360)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlataformaElevada"]
+shape = SubResource("RectangleShape2D_platform")
+
+[node name="ColorRect" type="ColorRect" parent="PlataformaElevada"]
+offset_left = -125.0
+offset_top = -16.0
+offset_right = 125.0
+offset_bottom = 16.0
+color = Color(0.25, 0.45, 0.35, 1)
+
+[node name="HazardArea" type="Area2D" parent="."]
+position = Vector2(640, 750)
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("3_hazard_script")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HazardArea"]
+shape = SubResource("RectangleShape2D_hazard")
+
+[node name="Player" parent="." instance=ExtResource("2_player_scene")]
+position = Vector2(400, 520)
