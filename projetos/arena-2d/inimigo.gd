@@ -16,6 +16,9 @@ func _ready() -> void:
 		velocidade = config.velocidade
 		dano_contato = config.dano_contato
 		sprite.modulate = config.cor_modulacao
+	
+	# Conexao local de colisao (Area2D escuta quando o corpo do Player entra)
+	body_entered.connect(_on_body_entered)
 
 func _physics_process(delta: float) -> void:
 	# Localiza a primeira entidade pertencente ao grupo "players"
@@ -36,3 +39,8 @@ func _physics_process(delta: float) -> void:
 		# Ajusta a orientacao horizontal do sprite
 		if direcao.x != 0.0:
 			sprite.flip_h = direcao.x < 0.0
+
+## Trata o impacto fisico ao entrar em contato com o jogador.
+func _on_body_entered(body: Node2D) -> void:
+	if body.is_in_group("players") and body.has_method("receber_dano"):
+		body.receber_dano(dano_contato)
