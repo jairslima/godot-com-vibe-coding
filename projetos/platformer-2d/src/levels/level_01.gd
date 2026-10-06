@@ -13,18 +13,24 @@ extends Node2D
 @onready var hazard_area: HazardArea = $HazardArea
 @onready var goal_area: GoalArea = $GoalArea
 @onready var player: Player = $Player
+@onready var hud: HUD = get_node_or_null("HUD")
+@onready var pause_menu: PauseMenu = get_node_or_null("PauseMenu")
+@onready var game_over_menu: GameOverMenu = get_node_or_null("GameOverMenu")
 
 func _ready() -> void:
 	if hazard_area:
 		hazard_area.player_entered.connect(_on_player_hazard)
 	if goal_area:
 		goal_area.reached.connect(_on_goal_reached)
+	if player:
+		player.player_damaged.connect(_on_player_damaged)
+		player.player_died.connect(_on_player_died)
 
 	# Se a camada de terreno estiver vazia (execução inicial ou headless), gerar o layout base
 	if world_layer and world_layer.get_used_cells().is_empty():
 		construir_layout_fase()
 
-	print("Level 01 inicializado com sucesso (TileMapLayer ativo).")
+	print("Level 01 inicializado com sucesso (TileMapLayer e UI ativos).")
 
 func construir_layout_fase() -> void:
 	# 1. Parede de fundo (BackgroundLayer)
@@ -63,3 +69,12 @@ func _on_goal_reached(next_scene_path: String) -> void:
 	print("Nível 01 concluído. Carregando: ", next_scene_path)
 	if not next_scene_path.is_empty() and ResourceLoader.exists(next_scene_path):
 		get_tree().change_scene_to_file(next_scene_path)
+
+func _on_player_damaged(current: int, max_val: int) -> void:
+	if hud:
+		hud.atualizar_vida(current, max_val)
+
+func _on_player_died() -> void:
+	print("Jogador derrotado. Exibindo menu modal de Game Over.")
+	if game_over_menu:
+		game_over_menu.exibir()

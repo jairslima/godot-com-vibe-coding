@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://bvyhud09uipause01"]
+
+[ext_resource type="Script" path="res://src/ui/hud.gd" id="1_hud"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_hud")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 60.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="HealthBox" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="HealthLabel" type="Label" parent="MarginContainer/HBoxContainer/HealthBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "VIDA: 3 / 3"
+
+[node name="HealthBar" type="ProgressBar" parent="MarginContainer/HBoxContainer/HealthBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 20)
+layout_mode = 2
+size_flags_vertical = 4
+max_value = 3.0
+step = 1.0
+value = 3.0
+show_percentage = false
+
+[node name="Spacer" type="Control" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ScoreBox" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="ScoreTitle" type="Label" parent="MarginContainer/HBoxContainer/ScoreBox"]
+layout_mode = 2
+text = "MOEDAS:"
+
+[node name="ScoreLabel" type="Label" parent="MarginContainer/HBoxContainer/ScoreBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "00"

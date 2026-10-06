@@ -5,6 +5,9 @@
 [ext_resource type="PackedScene" path="res://src/entities/player/player.tscn" id="3_player_scene"]
 [ext_resource type="Script" path="res://src/components/hazard_area.gd" id="4_hazard_script"]
 [ext_resource type="Script" path="res://src/components/goal_area.gd" id="5_goal_script"]
+[ext_resource type="PackedScene" path="res://src/ui/hud.tscn" id="6_hud"]
+[ext_resource type="PackedScene" path="res://src/ui/pause_menu.tscn" id="7_pause"]
+[ext_resource type="PackedScene" path="res://src/ui/game_over_menu.tscn" id="8_game_over"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hazard"]
 size = Vector2(2500, 64)
@@ -51,3 +54,9 @@ color = Color(0.2, 0.8, 0.4, 0.6)
 
 [node name="Player" parent="." instance=ExtResource("3_player_scene")]
 position = Vector2(120, 520)
+
+[node name="HUD" parent="." instance=ExtResource("6_hud")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("7_pause")]
+
+[node name="GameOverMenu" parent="." instance=ExtResource("8_game_over")]

@@ -2,11 +2,14 @@
 # ANEXAR AO NODE: Player (CharacterBody2D)
 # CENA: res://src/entities/player/player.tscn
 # INPUTS NECESSÁRIOS: move_left, move_right, jump
-# DEPENDÊNCIAS: Nenhuma
+# DEPENDÊNCIAS: res://src/components/health_component.gd
 # VERSÃO TESTADA: Godot 4.7.2 Stable (Windows 11)
-# RESULTADO ESPERADO: Personagem executa movimentação horizontal com aceleração e atrito, salto com gravidade dinâmica, corte de salto, tolerância de borda (coyote time) e pré-registro de pulo (jump buffer).
+# RESULTADO ESPERADO: Personagem executa movimentação horizontal, salto refinado, tolerâncias de borda e gerencia vida e reações a dano via HealthComponent.
 class_name Player
 extends CharacterBody2D
+
+signal player_damaged(current: int, max_val: int)
+signal player_died()
 
 @export_group("Movimento Horizontal")
 @export var max_speed: float = 240.0
@@ -24,9 +27,17 @@ extends CharacterBody2D
 @export var coyote_time: float = 0.12
 @export var jump_buffer_time: float = 0.10
 
+@onready var health_component: HealthComponent = get_node_or_null("%HealthComponent")
+@onready var sprite: Sprite2D = get_node_or_null("%Sprite2D")
+
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity", 980.0)
 var coyote_timer: float = 0.0
 var jump_buffer_timer: float = 0.0
+
+func _ready() -> void:
+	if health_component != null:
+		health_component.damaged.connect(_on_health_damaged)
+		health_component.died.connect(_on_health_died)
 
 func _physics_process(delta: float) -> void:
 	_atualizar_timers(delta)
@@ -71,3 +82,17 @@ func _processar_movimento_horizontal(delta: float) -> void:
 	else:
 		var current_friction: float = friction if is_on_floor() else air_friction
 		velocity.x = move_toward(velocity.x, 0.0, current_friction * delta)
+
+func rebater_salto() -> void:
+	velocity.y = jump_velocity * 0.75
+
+func _on_health_damaged(_amount: int) -> void:
+	if health_component != null:
+		player_damaged.emit(health_component.current_health, health_component.max_health)
+	if sprite != null:
+		sprite.modulate = Color(1.0, 0.4, 0.4, 1.0)
+		var tween: Tween = create_tween()
+		tween.tween_property(sprite, "modulate", Color.WHITE, 0.2)
+
+func _on_health_died() -> void:
+	player_died.emit()
