@@ -57,5 +57,7 @@ mesh = SubResource("BoxMesh_strip")
 [node name="CorridorLight" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.0, 0)
 light_color = Color(0.85, 0.95, 1, 1)
-light_energy = 1.0
+light_energy = 0.9
 omni_range = 6.0
+shadow_enabled = false
+

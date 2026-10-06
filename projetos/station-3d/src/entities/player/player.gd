@@ -26,12 +26,16 @@ signal interaction_prompt_changed(prompt_text: String, is_visible: bool)
 @onready var camera: Camera3D = %Camera3D
 @onready var collision_shape: CollisionShape3D = %CollisionShape3D
 @onready var interaction_ray: RayCast3D = %InteractionRayCast
+@onready var audio_listener: AudioListener3D = %AudioListener3D
 
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity", 9.8)
 var is_sprinting: bool = false
 var last_interactable: Node = null
 
 func _ready() -> void:
+	if audio_listener:
+		audio_listener.make_current()
+		
 	# Em modo headless com drivers dummy, não capturamos o mouse para evitar chamadas de SO desnecessárias
 	if not DisplayServer.get_name().is_empty() and DisplayServer.get_name() != "headless":
 		set_mouse_captured(true)

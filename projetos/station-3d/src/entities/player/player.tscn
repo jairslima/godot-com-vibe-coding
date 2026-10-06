@@ -39,6 +39,9 @@ unique_name_in_owner = true
 current = true
 fov = 75.0
 
+[node name="AudioListener3D" type="AudioListener3D" parent="Head/Camera3D"]
+unique_name_in_owner = true
+
 [node name="InteractionRayCast" type="RayCast3D" parent="Head/Camera3D"]
 unique_name_in_owner = true
 target_position = Vector3(0, 0, -2.5)

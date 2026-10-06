@@ -11,12 +11,14 @@ extends Node3D
 @onready var objectives: ObjectiveManager = %ObjectiveManager
 @onready var nav_region: NavigationRegion3D = %NavigationRegion3D
 @onready var drone_threat: DroneThreat = %DroneThreat
+@onready var reactor_audio: AudioStreamPlayer3D = %ReactorHumAudio
 
 func _ready() -> void:
-	print("--- ESTAÇÃO ESPACIAL: SISTEMAS DE INTERAÇÃO E IA ATIVOS ---")
-	print("Setor central, navegação 3D e objetivos inicializados.")
+	print("--- ESTAÇÃO ESPACIAL: SISTEMAS DE INTERAÇÃO, ILUMINAÇÃO E ÁUDIO 3D ATIVOS ---")
+	print("Setor central, navegação 3D, atmosfera e áudio espacial inicializados.")
 	
 	setup_signals()
+	setup_audio()
 
 func setup_signals() -> void:
 	if player and hud:
@@ -26,6 +28,15 @@ func setup_signals() -> void:
 		objectives.core_count_updated.connect(hud.update_objectives)
 		objectives.status_message_updated.connect(hud.display_status_message)
 		objectives.power_restored.connect(_on_power_restored)
+
+func setup_audio() -> void:
+	if reactor_audio and reactor_audio.stream == null:
+		reactor_audio.stream = AudioSynth3D.create_reactor_hum()
+		reactor_audio.play()
+	
+	if drone_threat and not drone_threat.has_node("DroneEngineAudio"):
+		var drone_stream := AudioSynth3D.create_drone_engine()
+		StationAudioManager.attach_spatial_emitter(drone_threat, drone_stream, 3.0, 18.0, -2.0, true)
 
 func _on_player_interaction_prompt_changed(prompt_text: String, is_visible: bool) -> void:
 	if not hud:

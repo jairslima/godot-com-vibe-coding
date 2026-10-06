@@ -17,7 +17,17 @@ background_color = Color(0.03, 0.04, 0.06, 1)
 ambient_light_source = 2
 ambient_light_color = Color(0.18, 0.2, 0.26, 1)
 ambient_light_energy = 0.8
-tonemap_mode = 2
+tonemap_mode = 3
+glow_enabled = true
+glow_intensity = 0.8
+glow_bloom = 0.2
+glow_hdr_threshold = 1.0
+fog_enabled = true
+fog_light_color = Color(0.06, 0.09, 0.14, 1)
+fog_density = 0.015
+fog_depth_begin = 4.0
+fog_depth_end = 35.0
+
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_hub"]
 agent_radius = 0.5
@@ -61,6 +71,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
 
 [node name="EngineRoom" parent="NavigationRegion3D/Environment" instance=ExtResource("3_room")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
+
+[node name="ReactorHumAudio" type="AudioStreamPlayer3D" parent="NavigationRegion3D/Environment/EngineRoom"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+unit_size = 5.0
+max_distance = 30.0
+volume_db = -4.0
+autoplay = true
 
 [node name="CrateGroup" type="Node3D" parent="NavigationRegion3D/Environment"]
 

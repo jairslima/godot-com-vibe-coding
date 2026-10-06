@@ -36,6 +36,9 @@ func _on_interacted(_player: Node3D = null) -> void:
 	if is_inside_tree():
 		var tree: SceneTree = get_tree()
 		if tree:
+			var pos: Vector3 = global_position
+			var stream := AudioSynth3D.create_core_pickup()
+			StationAudioManager.play_spatial_sound(tree, stream, pos, 4.0, 20.0, 0.0)
 			var objectives: ObjectiveManager = tree.get_first_node_in_group("objectives") as ObjectiveManager
 			if objectives:
 				objectives.register_core_collected()

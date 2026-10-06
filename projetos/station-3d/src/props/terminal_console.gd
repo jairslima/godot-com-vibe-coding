@@ -24,6 +24,9 @@ func _on_interacted(player: Node3D) -> void:
 	if not objectives:
 		return
 	
+	var stream := AudioSynth3D.create_terminal_beep()
+	StationAudioManager.play_spatial_sound(get_tree(), stream, global_position, 4.0, 20.0, 0.0)
+	
 	if objectives.can_restore_power():
 		is_activated = true
 		objectives.restore_power()
