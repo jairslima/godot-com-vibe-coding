@@ -1,0 +1,15 @@
+# Pastas e arquivos de cache gerados pelo Godot 4.x
+.godot/
+*.translation
+
+# Binários e pacotes exportados
+build/
+builds/
+export/
+*.pck
+
+# Segredos, credenciais e arquivos de ambiente
+.env
+*.env
+.env.*
+
