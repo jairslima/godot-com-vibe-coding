@@ -31,6 +31,11 @@ func _ready() -> void:
 		if cp is Checkpoint:
 			cp.activated.connect(_on_checkpoint_activated)
 
+	# Conecta todas as moedas presentes na cena
+	for coin_node: Node in get_tree().get_nodes_in_group("coins"):
+		if coin_node is Coin:
+			coin_node.collected.connect(_on_coin_collected)
+
 	# Se a camada de terreno estiver vazia (execução inicial ou headless), gerar o layout base
 	if world_layer and world_layer.get_used_cells().is_empty():
 		construir_layout_fase()
@@ -76,6 +81,31 @@ func construir_layout_fase() -> void:
 		world_layer.set_cell(Vector2i(x, 14), 0, Vector2i(2, 0))
 	for x in range(28, 31):
 		world_layer.set_cell(Vector2i(x, 11), 0, Vector2i(2, 0))
+
+	# Instancia moedas de demonstração sobre o trajeto
+	if get_tree().get_nodes_in_group("coins").is_empty():
+		_instanciar_moeda(Vector2(240.0, 530.0))
+		_instanciar_moeda(Vector2(530.0, 440.0))
+		_instanciar_moeda(Vector2(850.0, 400.0))
+
+func _instanciar_moeda(pos: Vector2) -> void:
+	var coin_scene: PackedScene = load("res://src/components/coin.tscn")
+	if coin_scene != null:
+		var coin_inst: Node = coin_scene.instantiate()
+		if coin_inst is Coin:
+			coin_inst.global_position = pos
+			coin_inst.collected.connect(_on_coin_collected)
+			add_child(coin_inst)
+
+func _on_coin_collected(valor: int) -> void:
+	print("Level01: Moeda coletada (+%d pontos)." % valor)
+	var sm: Node = get_node_or_null("/root/SaveManager")
+	if sm != null and "score" in sm:
+		sm.score += valor
+		if hud:
+			hud.atualizar_pontos(sm.score)
+	elif hud:
+		hud.atualizar_pontos(valor)
 
 func _on_player_hazard(_p: Player) -> void:
 	print("Jogador caiu na zona de perigo e foi reposicionado no respawn.")
