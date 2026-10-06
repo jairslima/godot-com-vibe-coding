@@ -11,6 +11,7 @@ extends Node2D
 const COIN_SCENE = preload("res://src/components/coin.tscn")
 const HUD_SCENE = preload("res://src/ui/hud.tscn")
 const PLAYER_SCENE = preload("res://src/entities/player/player.tscn")
+const SAVE_MANAGER_SCRIPT = preload("res://src/core/save_manager.gd")
 
 var save_manager: Node = null
 var testes_passaram: int = 0
@@ -21,7 +22,7 @@ func _ready() -> void:
 	# Obtém ou instancia SaveManager de forma autônoma para os testes
 	save_manager = get_node_or_null("/root/SaveManager")
 	if save_manager == null:
-		save_manager = SaveManager.new()
+		save_manager = SAVE_MANAGER_SCRIPT.new()
 		add_child(save_manager)
 
 	print("============================================================")

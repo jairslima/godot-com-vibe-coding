@@ -9,6 +9,7 @@ class_name TestSaveLoad
 extends Node2D
 
 const CHECKPOINT_SCRIPT = preload("res://src/components/checkpoint.gd")
+const SAVE_MANAGER_SCRIPT = preload("res://src/core/save_manager.gd")
 const TEST_SAVE_ATOMIC: String = "user://test_save_atomic.json"
 const TEST_SAVE_V1: String = "user://test_save_v1.json"
 const TEST_SAVE_CORRUPT: String = "user://test_save_corrupt.json"
@@ -22,7 +23,7 @@ func _ready() -> void:
 	# Obtém ou instancia SaveManager de forma autônoma
 	save_manager = get_node_or_null("/root/SaveManager")
 	if save_manager == null:
-		save_manager = SaveManager.new()
+		save_manager = SAVE_MANAGER_SCRIPT.new()
 		add_child(save_manager)
 
 	print("============================================================")
