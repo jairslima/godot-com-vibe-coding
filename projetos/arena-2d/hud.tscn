@@ -21,6 +21,11 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Vida: 100 / 100"
 
+[node name="RotuloStamina" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Stamina: 100 / 100"
+
 [node name="RotuloPontos" type="Label" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2

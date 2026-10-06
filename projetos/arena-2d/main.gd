@@ -22,11 +22,13 @@ func _ready() -> void:
 	
 	# Conexoes arquiteturais desacopladas (Call down, signal up)
 	player.vida_alterada.connect(_on_player_vida_alterada)
+	player.stamina_alterada.connect(hud.atualizar_stamina)
 	player.morreu.connect(_on_player_morreu)
 	pontuacao_alterada.connect(hud.atualizar_pontuacao)
 	
 	# Sincronizacao inicial da interface com o estado do jogo
 	hud.atualizar_vida(player.vida_atual, player.vida_maxima)
+	hud.atualizar_stamina(player.stamina_atual, player.stamina_maxima)
 	hud.atualizar_pontuacao(pontuacao)
 
 func _process(delta: float) -> void:

@@ -3,6 +3,7 @@ extends CharacterBody2D
 ## Sinais de comunicacao desacoplada para notificacao de estado.
 signal vida_alterada(vida_atual: int, vida_maxima: int)
 signal morreu()
+signal stamina_alterada(stamina_atual: float, stamina_maxima: float)
 
 ## Velocidade de deslocamento do jogador em pixels por segundo.
 @export var speed: float = 300.0
@@ -13,8 +14,26 @@ signal morreu()
 ## Duracao da janela de invulnerabilidade apos sofrer dano (em segundos).
 @export var tempo_invulnerabilidade: float = 0.8
 
+## Capacidade maxima de stamina para corrida rapida.
+@export var stamina_maxima: float = 100.0
+
+## Taxa de consumo de stamina por segundo durante corrida rapida.
+@export var consumo_stamina: float = 40.0
+
+## Taxa de regeneracao de stamina por segundo quando em repouso ou velocidade normal.
+@export var regeneracao_stamina: float = 25.0
+
+## Multiplicador de velocidade aplicado durante a corrida rapida.
+@export var multiplicador_sprint: float = 1.6
+
 ## Pontos de vida atuais do jogador.
 var vida_atual: int = 100
+
+## Valor atual de stamina do jogador.
+var stamina_atual: float = 100.0
+
+## Flag que indica se o jogador esta ativamente correndo com sprint.
+var esta_correndo: bool = false
 
 ## Flag que indica se o jogador esta temporariamente protegido contra dano.
 var esta_invulneravel: bool = false
@@ -27,16 +46,34 @@ var esta_vivo: bool = true
 
 func _ready() -> void:
 	vida_atual = vida_maxima
+	stamina_atual = stamina_maxima
 	print("Player inicializado na arena. Posicao: ", global_position)
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if not esta_vivo:
 		velocity = Vector2.ZERO
 		return
 	
 	# Leitura vetorial das 8 direcoes com normalizacao automatica
 	var direcao: Vector2 = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	velocity = direcao * speed
+	
+	# Gerenciamento da mecanica de corrida rapida orientada por stamina
+	var quer_correr: bool = Input.is_action_pressed("sprint") and direcao != Vector2.ZERO
+	if quer_correr:
+		if stamina_atual > 0.0:
+			esta_correndo = true
+			stamina_atual = maxf(0.0, stamina_atual - consumo_stamina * delta)
+			velocity = direcao * (speed * multiplicador_sprint)
+		else:
+			esta_correndo = false
+			velocity = direcao * speed
+	else:
+		esta_correndo = false
+		if stamina_atual < stamina_maxima:
+			stamina_atual = minf(stamina_maxima, stamina_atual + regeneracao_stamina * delta)
+		velocity = direcao * speed
+	
+	stamina_alterada.emit(stamina_atual, stamina_maxima)
 	move_and_slide()
 
 ## Aplica dano ao jogador respeitando o periodo de invulnerabilidade.
