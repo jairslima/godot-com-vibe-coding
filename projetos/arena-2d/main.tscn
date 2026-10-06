@@ -21,3 +21,9 @@ unique_name_in_owner = true
 
 [node name="HUD" parent="." instance=ExtResource("3_hud")]
 unique_name_in_owner = true
+
+[node name="AudioHit" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+
+[node name="AudioGameOver" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true

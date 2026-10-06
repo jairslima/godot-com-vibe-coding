@@ -6,6 +6,8 @@ signal pontuacao_alterada(pontos: int)
 @onready var player: CharacterBody2D = %Player
 @onready var hud: CanvasLayer = %HUD
 @onready var spawner: Node2D = %Spawner
+@onready var audio_hit: AudioStreamPlayer = %AudioHit
+@onready var audio_game_over: AudioStreamPlayer = %AudioGameOver
 
 var pontuacao: int = 0
 var em_game_over: bool = false
@@ -13,6 +15,10 @@ var tempo_acumulado: float = 0.0
 
 func _ready() -> void:
 	print("Arena 2D inicializada!")
+	
+	# Configuracao procedural de streams de audio sem assets externos
+	audio_hit.stream = GeradorAudio.criar_som_hit()
+	audio_game_over.stream = GeradorAudio.criar_som_game_over()
 	
 	# Conexoes arquiteturais desacopladas (Call down, signal up)
 	player.vida_alterada.connect(_on_player_vida_alterada)
@@ -39,9 +45,12 @@ func _process(delta: float) -> void:
 
 func _on_player_vida_alterada(atual: int, maxima: int) -> void:
 	hud.atualizar_vida(atual, maxima)
+	if atual > 0:
+		audio_hit.play()
 
 func _on_player_morreu() -> void:
 	em_game_over = true
 	spawner.parar()
+	audio_game_over.play()
 	hud.exibir_game_over()
 	print("Rodada encerrada. Pontuacao final: ", pontuacao)
