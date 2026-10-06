@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6spiketrap0101"]
+
+[ext_resource type="Script" path="res://src/components/spike_trap.gd" id="1_spike"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_spike"]
+size = Vector2(32, 16)
+
+[node name="SpikeTrap" type="Area2D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_spike")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_spike")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -16.0
+offset_top = 0.0
+offset_right = 16.0
+offset_bottom = 16.0
+color = Color(0.85, 0.2, 0.2, 1)
