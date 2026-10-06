@@ -26,11 +26,26 @@ func _ready() -> void:
 		player.player_damaged.connect(_on_player_damaged)
 		player.player_died.connect(_on_player_died)
 
+	# Conecta todos os nós de checkpoint presentes na cena
+	for cp: Node in get_tree().get_nodes_in_group("checkpoints"):
+		if cp is Checkpoint:
+			cp.activated.connect(_on_checkpoint_activated)
+
 	# Se a camada de terreno estiver vazia (execução inicial ou headless), gerar o layout base
 	if world_layer and world_layer.get_used_cells().is_empty():
 		construir_layout_fase()
 
-	print("Level 01 inicializado com sucesso (TileMapLayer e UI ativos).")
+	# Aplica posição de checkpoint salvo se houver
+	var sm: Node = get_node_or_null("/root/SaveManager")
+	if sm != null and player != null:
+		if sm.current_spawn_position != Vector2.ZERO:
+			player.global_position = sm.current_spawn_position
+		if not sm.current_checkpoint_id.is_empty():
+			for cp: Node in get_tree().get_nodes_in_group("checkpoints"):
+				if cp is Checkpoint and cp.checkpoint_id == sm.current_checkpoint_id:
+					cp.ativar(false)
+
+	print("Level 01 inicializado com sucesso (TileMapLayer, UI e Checkpoints ativos).")
 
 func construir_layout_fase() -> void:
 	# 1. Parede de fundo (BackgroundLayer)
@@ -63,11 +78,20 @@ func construir_layout_fase() -> void:
 		world_layer.set_cell(Vector2i(x, 11), 0, Vector2i(2, 0))
 
 func _on_player_hazard(_p: Player) -> void:
-	print("Jogador caiu na zona de perigo e foi reposicionado.")
+	print("Jogador caiu na zona de perigo e foi reposicionado no respawn.")
+
+func _on_checkpoint_activated(cp_id: String, spawn_pos: Vector2) -> void:
+	print("Level01: Checkpoint ativado: ", cp_id, " na posição: ", spawn_pos)
+	var sm: Node = get_node_or_null("/root/SaveManager")
+	if sm != null and sm.has_method("registrar_checkpoint"):
+		sm.registrar_checkpoint(cp_id, spawn_pos)
 
 func _on_goal_reached(next_scene_path: String) -> void:
-	print("Nível 01 concluído. Carregando: ", next_scene_path)
-	if not next_scene_path.is_empty() and ResourceLoader.exists(next_scene_path):
+	print("Nível 01 concluído. Carregando com SaveManager: ", next_scene_path)
+	var sm: Node = get_node_or_null("/root/SaveManager")
+	if sm != null and sm.has_method("trocar_de_fase"):
+		sm.trocar_de_fase(next_scene_path)
+	elif not next_scene_path.is_empty() and ResourceLoader.exists(next_scene_path):
 		get_tree().change_scene_to_file(next_scene_path)
 
 func _on_player_damaged(current: int, max_val: int) -> void:

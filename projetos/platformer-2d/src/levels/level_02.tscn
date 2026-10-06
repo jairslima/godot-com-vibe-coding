@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" path="res://src/entities/player/player.tscn" id="3_player_scene"]
 [ext_resource type="Script" path="res://src/components/hazard_area.gd" id="4_hazard_script"]
 [ext_resource type="Script" path="res://src/components/goal_area.gd" id="5_goal_script"]
+[ext_resource type="PackedScene" path="res://src/components/checkpoint.tscn" id="6_checkpoint"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hazard"]
 size = Vector2(2500, 64)
@@ -51,3 +52,7 @@ color = Color(0.9, 0.7, 0.2, 0.7)
 
 [node name="Player" parent="." instance=ExtResource("3_player_scene")]
 position = Vector2(100, 520)
+
+[node name="Checkpoint01" parent="." instance=ExtResource("6_checkpoint")]
+position = Vector2(300, 380)
+checkpoint_id = "cp_level02_degrau"

@@ -18,5 +18,9 @@ func _ready() -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body is Player:
 		player_entered.emit(body)
-		body.global_position = reset_position
+		var spawn_pos: Vector2 = reset_position
+		var sm: Node = get_node_or_null("/root/SaveManager")
+		if sm != null and sm.has_method("obter_ponto_respawn"):
+			spawn_pos = sm.obter_ponto_respawn(reset_position)
+		body.global_position = spawn_pos
 		body.velocity = Vector2.ZERO

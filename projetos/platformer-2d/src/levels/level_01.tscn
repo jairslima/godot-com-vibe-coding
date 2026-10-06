@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" path="res://src/ui/hud.tscn" id="6_hud"]
 [ext_resource type="PackedScene" path="res://src/ui/pause_menu.tscn" id="7_pause"]
 [ext_resource type="PackedScene" path="res://src/ui/game_over_menu.tscn" id="8_game_over"]
+[ext_resource type="PackedScene" path="res://src/components/checkpoint.tscn" id="9_checkpoint"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hazard"]
 size = Vector2(2500, 64)
@@ -60,3 +61,7 @@ position = Vector2(120, 520)
 [node name="PauseMenu" parent="." instance=ExtResource("7_pause")]
 
 [node name="GameOverMenu" parent="." instance=ExtResource("8_game_over")]
+ 
+[node name="Checkpoint01" parent="." instance=ExtResource("9_checkpoint")]
+position = Vector2(620, 576)
+checkpoint_id = "cp_level01_meio"

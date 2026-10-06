@@ -20,10 +20,23 @@ func _ready() -> void:
 	if goal_area:
 		goal_area.reached.connect(_on_goal_reached)
 
+	for cp: Node in get_tree().get_nodes_in_group("checkpoints"):
+		if cp is Checkpoint:
+			cp.activated.connect(_on_checkpoint_activated)
+
 	if world_layer and world_layer.get_used_cells().is_empty():
 		construir_layout_fase()
 
-	print("Level 02 inicializado com sucesso (segunda fase em TileMapLayer).")
+	var sm: Node = get_node_or_null("/root/SaveManager")
+	if sm != null and player != null:
+		if sm.current_spawn_position != Vector2.ZERO:
+			player.global_position = sm.current_spawn_position
+		if not sm.current_checkpoint_id.is_empty():
+			for cp: Node in get_tree().get_nodes_in_group("checkpoints"):
+				if cp is Checkpoint and cp.checkpoint_id == sm.current_checkpoint_id:
+					cp.ativar(false)
+
+	print("Level 02 inicializado com sucesso (segunda fase com suporte a checkpoints).")
 
 func construir_layout_fase() -> void:
 	# 1. Parede de fundo decorativa
@@ -59,7 +72,16 @@ func construir_layout_fase() -> void:
 func _on_player_hazard(_p: Player) -> void:
 	print("Jogador atingiu a zona de perigo no Level 02 e foi reposicionado.")
 
+func _on_checkpoint_activated(cp_id: String, spawn_pos: Vector2) -> void:
+	print("Level02: Checkpoint ativado: ", cp_id, " em: ", spawn_pos)
+	var sm: Node = get_node_or_null("/root/SaveManager")
+	if sm != null and sm.has_method("registrar_checkpoint"):
+		sm.registrar_checkpoint(cp_id, spawn_pos)
+
 func _on_goal_reached(next_scene_path: String) -> void:
 	print("Parabéns! Nível 02 concluído com sucesso.")
-	if not next_scene_path.is_empty() and ResourceLoader.exists(next_scene_path):
+	var sm: Node = get_node_or_null("/root/SaveManager")
+	if sm != null and sm.has_method("trocar_de_fase"):
+		sm.trocar_de_fase(next_scene_path)
+	elif not next_scene_path.is_empty() and ResourceLoader.exists(next_scene_path):
 		get_tree().change_scene_to_file(next_scene_path)
