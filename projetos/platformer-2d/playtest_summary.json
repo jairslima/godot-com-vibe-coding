@@ -1,0 +1,49 @@
+{
+	"display_server": "Windows",
+	"headless_mode": false,
+	"screenshots_captured": [
+		"playtest_01_spawn.png",
+		"playtest_02_jump.png",
+		"playtest_03_land.png"
+	],
+	"session_status": "COMPLETED",
+	"telemetry": [
+		{
+			"coins": 0,
+			"event": "spawn_idle",
+			"frame": 5,
+			"health": 3,
+			"is_on_floor": false,
+			"player_pos_x": 120.0,
+			"player_pos_y": 523.7,
+			"time_sec": 0.083,
+			"velocity_x": 0.0,
+			"velocity_y": 94.7
+		},
+		{
+			"coins": 10,
+			"event": "mid_air_jump",
+			"frame": 50,
+			"health": 3,
+			"is_on_floor": false,
+			"player_pos_x": 254.3,
+			"player_pos_y": 488.0,
+			"time_sec": 0.833,
+			"velocity_x": 240.0,
+			"velocity_y": -167.7
+		},
+		{
+			"coins": 10,
+			"event": "landed_checkpoint",
+			"frame": 100,
+			"health": 3,
+			"is_on_floor": true,
+			"player_pos_x": 413.0,
+			"player_pos_y": 551.9,
+			"time_sec": 1.667,
+			"velocity_x": 0.0,
+			"velocity_y": 0.0
+		}
+	],
+	"total_frames": 110
+}
