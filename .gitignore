@@ -1,0 +1,27 @@
+# Godot 4
+.godot/
+.mono/
+*.translation
+
+# Builds e pacotes exportados
+build/
+bin/
+*.exe
+*.pck
+*.x86_64
+*.apk
+*.aab
+
+# Segredos e ambiente local (nunca versionar)
+.env
+.env.*
+*.key
+*.pem
+secrets.*
+*.pkl
+
+# Temporarios
+*.tmp
+*.log
+.~lock*
+__pycache__/
