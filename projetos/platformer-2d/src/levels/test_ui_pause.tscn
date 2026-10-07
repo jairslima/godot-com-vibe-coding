@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://ctestuipause01"]
+
+[ext_resource type="Script" path="res://src/levels/test_ui_pause.gd" id="1_test_ui"]
+[ext_resource type="PackedScene" path="res://src/ui/hud.tscn" id="2_hud"]
+[ext_resource type="PackedScene" path="res://src/ui/pause_menu.tscn" id="3_pause"]
+[ext_resource type="PackedScene" path="res://src/ui/game_over_menu.tscn" id="4_game_over"]
+
+[node name="TestUIPause" type="Node2D"]
+script = ExtResource("1_test_ui")
+
+[node name="HUD" parent="." instance=ExtResource("2_hud")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("3_pause")]
+
+[node name="GameOverMenu" parent="." instance=ExtResource("4_game_over")]

@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://src/levels/test_world_tiles.gd" id="1_test_script"]
+[ext_resource type="PackedScene" path="res://src/levels/level_01.tscn" id="2_level_scene"]
+
+[node name="TestWorldTiles" type="Node2D"]
+script = ExtResource("1_test_script")
+
+[node name="Level01" parent="." instance=ExtResource("2_level_scene")]

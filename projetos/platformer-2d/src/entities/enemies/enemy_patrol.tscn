@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://src/entities/enemies/enemy_patrol.gd" id="1_enemy_script"]
+[ext_resource type="Texture2D" path="res://icon.svg" id="2_texture"]
+[ext_resource type="Script" path="res://src/components/health_component.gd" id="3_health_script"]
+[ext_resource type="Script" path="res://src/components/hitbox_component.gd" id="4_hitbox_script"]
+[ext_resource type="Script" path="res://src/components/hurtbox_component.gd" id="5_hurtbox_script"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
+size = Vector2(24, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_box"]
+size = Vector2(26, 28)
+
+[node name="EnemyPatrol" type="CharacterBody2D" groups=["enemies"]]
+collision_layer = 4
+collision_mask = 1
+script = ExtResource("1_enemy_script")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 0.3, 0.3, 1)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_texture")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+shape = SubResource("RectangleShape2D_body")
+
+[node name="FloorDetector" type="RayCast2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(16, 0)
+target_position = Vector2(0, 24)
+collision_mask = 1
+
+[node name="WallDetector" type="RayCast2D" parent="."]
+unique_name_in_owner = true
+target_position = Vector2(20, 0)
+collision_mask = 1
+
+[node name="HealthComponent" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_health_script")
+max_health = 2
+current_health = 2
+
+[node name="HitboxComponent" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("4_hitbox_script")
+damage = 1
+
+[node name="HitboxCollision" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("RectangleShape2D_box")
+
+[node name="HurtboxComponent" type="Area2D" parent="." node_paths=PackedStringArray("health_component")]
+unique_name_in_owner = true
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("5_hurtbox_script")
+health_component = NodePath("../HealthComponent")
+
+[node name="HurtboxCollision" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("RectangleShape2D_body")

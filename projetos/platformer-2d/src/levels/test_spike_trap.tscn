@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://testspiketrap0101"]
+
+[ext_resource type="Script" path="res://src/levels/test_spike_trap.gd" id="1_test_spike"]
+
+[node name="TestSpikeTrap" type="Node2D"]
+script = ExtResource("1_test_spike")
