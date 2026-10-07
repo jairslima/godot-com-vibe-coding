@@ -1,0 +1,23 @@
+# Godot 4+ ignore rules
+.godot/
+*.translation
+
+# Segredos, credenciais e ambiente local
+.env
+*.env
+*.secret
+*.key
+*.pem
+credentials.json
+token.txt
+
+# Exportacao e pacotes compilados
+export_presets.cfg
+build/
+bin/
+dist/
+
+# Logs e rascunhos de agentes
+*.log
+draft/
+*.tmp

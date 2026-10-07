@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0123conversational456"]
+
+[ext_resource type="Script" path="res://tests/test_conversational_npc.gd" id="1_test_npc"]
+
+[node name="TestConversationalNpc" type="Node"]
+script = ExtResource("1_test_npc")

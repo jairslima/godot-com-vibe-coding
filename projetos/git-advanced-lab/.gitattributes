@@ -1,0 +1,41 @@
+# Normalize EOL for all files that Git considers text files.
+* text=auto eol=lf
+
+# Git LFS Tracking (Assets)
+
+# 3D Models
+# (ilustrativo, desativado neste repositorio) *.fbx filter=lfs diff=lfs merge=lfs -text
+# (ilustrativo, desativado neste repositorio) *.gltf filter=lfs diff=lfs merge=lfs -text
+# (ilustrativo, desativado neste repositorio) *.glb filter=lfs diff=lfs merge=lfs -text
+# (ilustrativo, desativado neste repositorio) *.blend filter=lfs diff=lfs merge=lfs -text
+# (ilustrativo, desativado neste repositorio) *.obj filter=lfs diff=lfs merge=lfs -text
+
+# Images
+# (ilustrativo, desativado neste repositorio) *.png filter=lfs diff=lfs merge=lfs -text
+# (ilustrativo, desativado neste repositorio) *.svg filter=lfs diff=lfs merge=lfs -text
+# (ilustrativo, desativado neste repositorio) *.jpg filter=lfs diff=lfs merge=lfs -text
+# (ilustrativo, desativado neste repositorio) *.jpeg filter=lfs diff=lfs merge=lfs -text
+# (ilustrativo, desativado neste repositorio) *.gif filter=lfs diff=lfs merge=lfs -text
+# (ilustrativo, desativado neste repositorio) *.tga filter=lfs diff=lfs merge=lfs -text
+# (ilustrativo, desativado neste repositorio) *.webp filter=lfs diff=lfs merge=lfs -text
+# (ilustrativo, desativado neste repositorio) *.exr filter=lfs diff=lfs merge=lfs -text
+# (ilustrativo, desativado neste repositorio) *.hdr filter=lfs diff=lfs merge=lfs -text
+# (ilustrativo, desativado neste repositorio) *.dds filter=lfs diff=lfs merge=lfs -text
+
+# Audio
+# (ilustrativo, desativado neste repositorio) *.mp3 filter=lfs diff=lfs merge=lfs -text
+# (ilustrativo, desativado neste repositorio) *.wav filter=lfs diff=lfs merge=lfs -text
+# (ilustrativo, desativado neste repositorio) *.ogg filter=lfs diff=lfs merge=lfs -text
+
+# Font & Icon
+# (ilustrativo, desativado neste repositorio) *.ttf filter=lfs diff=lfs merge=lfs -text
+# (ilustrativo, desativado neste repositorio) *.otf filter=lfs diff=lfs merge=lfs -text
+# (ilustrativo, desativado neste repositorio) *.ico filter=lfs diff=lfs merge=lfs -text
+
+# Godot LFS Specific
+# (ilustrativo, desativado neste repositorio) *.scn filter=lfs diff=lfs merge=lfs -text
+# (ilustrativo, desativado neste repositorio) *.res filter=lfs diff=lfs merge=lfs -text
+# (ilustrativo, desativado neste repositorio) *.material filter=lfs diff=lfs merge=lfs -text
+# (ilustrativo, desativado neste repositorio) *.anim filter=lfs diff=lfs merge=lfs -text
+# (ilustrativo, desativado neste repositorio) *.mesh filter=lfs diff=lfs merge=lfs -text
+# (ilustrativo, desativado neste repositorio) *.lmbake filter=lfs diff=lfs merge=lfs -text

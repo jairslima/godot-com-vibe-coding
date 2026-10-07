@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://compliance001test48"]
+
+[ext_resource type="Script" path="res://tests/test_compliance_manager.gd" id="1_test_compliance"]
+
+[node name="TestComplianceManager" type="Node"]
+script = ExtResource("1_test_compliance")

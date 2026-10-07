@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8901localmodelprov234"]
+
+[ext_resource type="Script" path="res://tests/test_local_model_provider.gd" id="1_test_local"]
+
+[node name="TestLocalModelProvider" type="Node"]
+script = ExtResource("1_test_local")

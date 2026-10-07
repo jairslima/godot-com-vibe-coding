@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8y9j4k2m1n0p"]
+
+[ext_resource type="Script" path="res://tests/test_git_runner.gd" id="1_test"]
+
+[node name="TestGitRunner" type="Node"]
+script = ExtResource("1_test")

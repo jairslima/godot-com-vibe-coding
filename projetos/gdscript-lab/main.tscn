@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7k0y1234567a"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_main"]
+[ext_resource type="Script" path="res://inimigo.gd" id="2_inimigo"]
+[ext_resource type="Script" path="res://ciclo_vida.gd" id="3_ciclo"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_main")
+
+[node name="Inimigo" type="Node2D" parent="."]
+script = ExtResource("2_inimigo")
+
+[node name="IndicadorAlerta" type="Marker2D" parent="Inimigo"]
+
+[node name="CicloVidaDemo" type="Node" parent="."]
+script = ExtResource("3_ciclo")
+
+[node name="StatusRotulo" type="Label" parent="."]
+unique_name_in_owner = true
+offset_right = 120.0
+offset_bottom = 23.0
+text = "HP: 100/100"

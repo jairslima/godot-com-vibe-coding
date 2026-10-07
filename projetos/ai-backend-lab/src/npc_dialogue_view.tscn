@@ -1,0 +1,131 @@
+[gd_scene load_steps=5 format=3 uid="uid://c789npcdialogueview01"]
+
+[ext_resource type="Script" path="res://src/npc_dialogue_view.gd" id="1_view"]
+[ext_resource type="Script" path="res://src/conversational_npc.gd" id="2_npc"]
+[ext_resource type="Script" path="res://src/ai_network_client.gd" id="3_net"]
+[ext_resource type="Script" path="res://src/npc_persona.gd" id="4_persona"]
+
+[sub_resource type="Resource" id="Resource_droide_padrao"]
+script = ExtResource("4_persona")
+npc_id = "droide_manutencao"
+display_name = "Droide de Manutenção 7-Alpha"
+role_description = "Droide técnico responsável pelo monitoramento e pressurização da Estação 3D."
+tone_and_style = "Formal, conciso, focado em integridade estrutural e segurança técnica."
+personality_traits = PackedStringArray("obediente a protocolos de segurança da estação", "cauteloso quanto a vazamentos de radiação", "focado em reparos mecânicos e elétricos")
+world_knowledge = PackedStringArray("A estação sofreu sobrecarga de energia recente no reator principal.", "O setor 4 contém consoles de pressurização ativos.", "Drones hostis patrulham os corredores inferiores da estação.")
+knowledge_boundaries = PackedStringArray("Não sabe senhas de comando militar da frota estelar.", "Desconhece assuntos fora da estação espacial e do universo do jogo.", "Não tem acesso às armas da nave nem ao controle do hangar principal.")
+allowed_actions = PackedStringArray("nenhuma", "conceder_dica", "abrir_porta_manutencao", "atualizar_objetivo_hud")
+max_memory_turns = 4
+fallback_dialogues = {
+"energia": "Sensores locais indicam que o núcleo auxiliar de energia permanece descarregado.",
+"porta": "Acesso ao duto de ventilação disponível apenas mediante autorização de serviço.",
+"ajuda": "Recomendo isolar o compartimento despressurizado antes de restaurar os relés.",
+"seguranca": "Alerta: tentativas de sobreposição de privilégios violam o protocolo de diretrizes da estação.",
+"padrao": "Canal de voz instável. Mantenha cautela nos corredores da estação."
+}
+
+[node name="NpcDialogueView" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_view")
+
+[node name="AiNetworkClient" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_net")
+
+[node name="ConversationalNpc" type="Node" parent="." node_paths=PackedStringArray("network_client")]
+unique_name_in_owner = true
+script = ExtResource("2_npc")
+persona = SubResource("Resource_droide_padrao")
+network_client = NodePath("../AiNetworkClient")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="SpeakerNameLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Droide de Manutenção 7-Alpha"
+
+[node name="RoleLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Droide técnico responsável pelo monitoramento e pressurização da Estação 3D."
+
+[node name="HSeparator" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SpeechLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 16
+text = "Canal de comunicação aberto."
+autowrap_mode = 3
+
+[node name="EmotionLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Estado Emocional: [Neutro]"
+
+[node name="ActionLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Última Ação do Jogo: Nenhuma"
+
+[node name="MemoryStatusLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Memória Curta: 0 turnos armazenados"
+
+[node name="SecurityAlertLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.3, 0.3, 1)
+theme_override_font_sizes/font_size = 13
+text = ""
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="PromptEdit" type="LineEdit" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Fale com o droide de manutenção (ex: O que houve com a energia?)..."
+
+[node name="SendButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Transmitir"

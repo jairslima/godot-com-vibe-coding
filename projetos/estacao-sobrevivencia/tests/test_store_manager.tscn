@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5r3s8t9m1q4w"]
+
+[ext_resource type="Script" path="res://tests/test_store_manager.gd" id="1_test_store"]
+
+[node name="TestStoreManager" type="Node"]
+script = ExtResource("1_test_store")

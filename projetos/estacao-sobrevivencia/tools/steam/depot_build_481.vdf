@@ -1,0 +1,15 @@
+"DepotBuildConfig"
+{
+	"DepotID" "481"
+	"ContentRoot" "."
+	"FileMapping"
+	{
+		"LocalPath" "*"
+		"DepotPath" "."
+		"recursive" "1"
+	}
+	"FileExclusion" "*.tmp"
+	"FileExclusion" "*.pdb"
+	"FileExclusion" ".git*"
+	"FileExclusion" ".env*"
+}

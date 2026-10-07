@@ -7,10 +7,11 @@ Motor: Godot Engine 4.7.2 Stable (Windows 11)
 ## 1. Ativos Gráficos
 
 * Arquivo: `res://icon.svg`
-  * Origem: Logotipo oficial do Godot Engine
-  * Autor: Andrea Calabro / Contribuidores do Godot Engine
-  * Licença: Creative Commons Attribution 4.0 International (CC BY 4.0)
-  * Uso no projeto: Textura base para os sprites do Jogador e Inimigo.
+  * Origem: SVG geométrico simples, escrito como código (quadrado arredondado com formas básicas), criado para o livro
+  * Autor: Jair Lima, com auxílio de IA para escrever o código do SVG
+  * Licença: MIT License (2026)
+  * Observação: não é o logotipo do Godot Engine nem derivado dele.
+  * Uso no projeto: textura base para os sprites do Jogador e do Inimigo.
 
 * Arquivo: `res://assets/sprites/tileset_atlas.png`
   * Origem: Gerador procedural em tempo de desenvolvimento (`tools/gerar_tileset.gd`)

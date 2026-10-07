@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cx8m4y3l8v1n2"]
+
+[ext_resource type="Script" path="res://test_mcp_integration.gd" id="1_mcp"]
+
+[node name="TestMCPIntegration" type="Node"]
+script = ExtResource("1_mcp")

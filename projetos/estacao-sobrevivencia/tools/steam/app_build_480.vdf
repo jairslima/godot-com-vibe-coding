@@ -1,0 +1,23 @@
+"AppBuild"
+{
+	"AppID" "480"
+	"Desc" "Estacao Sobrevivencia - Build de Teste Interno"
+	"ContentRoot" "..\..\build\"
+	"BuildOutput" "..\..\build\steam_output\"
+	"SetLive" "internal_testing"
+	"Preview" "0"
+	"Local" ""
+
+	"Depots"
+	{
+		"481"
+		{
+			"FileMapping"
+			{
+				"LocalPath" "*"
+				"DepotPath" "."
+				"recursive" "1"
+			}
+		}
+	}
+}

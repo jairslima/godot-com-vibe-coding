@@ -7,10 +7,11 @@ Motor: Godot Engine 4.7.2 Stable (Windows 11)
 ## 1. Ativos Graficos
 
 * Arquivo: `res://icon.svg`
-  * Origem: Logotipo oficial do Godot Engine
-  * Autor: Andrea Calabro / Godot Engine Contributors
-  * Licenca: Creative Commons Attribution 4.0 International (CC BY 4.0)
-  * Uso no projeto: Textura base para os sprites de teste do Player e do Inimigo.
+  * Origem: SVG geometrico simples, escrito como codigo (quadrado arredondado com formas básicas), criado para o livro
+  * Autor: Jair Lima, com auxílio de IA para escrever o codigo do SVG
+  * Licenca: MIT License (2026)
+  * Observacao: nao é o logotipo do Godot Engine nem derivado dele.
+  * Uso no projeto: textura base para os sprites de teste do Player e do Inimigo.
 
 ## 2. Ativos de Audio
 

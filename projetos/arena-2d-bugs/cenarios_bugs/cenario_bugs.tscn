@@ -1,0 +1,20 @@
+[gd_scene load_steps=6 format=3 uid="uid://c7x9m3k1vbug"]
+
+[ext_resource type="Script" path="res://cenarios_bugs/caso1_null_instance.gd" id="1_null"]
+[ext_resource type="Script" path="res://cenarios_bugs/caso2_no_nao_encontrado.gd" id="2_node"]
+[ext_resource type="Script" path="res://cenarios_bugs/caso3_sinal_desconectado.gd" id="3_signal"]
+[ext_resource type="Script" path="res://cenarios_bugs/caso4_erro_tipagem.gd" id="4_type"]
+
+[node name="CenarioBugs" type="Node2D"]
+
+[node name="Caso1NullInstance" type="Node" parent="."]
+script = ExtResource("1_null")
+
+[node name="Caso2NoNaoEncontrado" type="Node" parent="."]
+script = ExtResource("2_node")
+
+[node name="Caso3SinalDesconectado" type="Node" parent="."]
+script = ExtResource("3_signal")
+
+[node name="Caso4ErroTipagem" type="Node" parent="."]
+script = ExtResource("4_type")

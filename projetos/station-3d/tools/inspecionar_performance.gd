@@ -1,0 +1,25 @@
+@tool
+extends SceneTree
+
+func _init() -> void:
+	print("--- MONITORES DA CLASSE PERFORMANCE NO GODOT 4.7.2 ---")
+	print("TIME_FPS: ", Performance.TIME_FPS)
+	print("TIME_PROCESS: ", Performance.TIME_PROCESS)
+	print("TIME_PHYSICS_PROCESS: ", Performance.TIME_PHYSICS_PROCESS)
+	print("MEMORY_STATIC: ", Performance.MEMORY_STATIC)
+	print("MEMORY_STATIC_MAX: ", Performance.MEMORY_STATIC_MAX)
+	print("MEMORY_MESSAGE_BUFFER_MAX: ", Performance.MEMORY_MESSAGE_BUFFER_MAX)
+	print("OBJECT_COUNT: ", Performance.OBJECT_COUNT)
+	print("OBJECT_RESOURCE_COUNT: ", Performance.OBJECT_RESOURCE_COUNT)
+	print("OBJECT_NODE_COUNT: ", Performance.OBJECT_NODE_COUNT)
+	print("OBJECT_ORPHAN_NODE_COUNT: ", Performance.OBJECT_ORPHAN_NODE_COUNT)
+	print("RENDER_TOTAL_OBJECTS_IN_FRAME: ", Performance.RENDER_TOTAL_OBJECTS_IN_FRAME)
+	print("RENDER_TOTAL_PRIMITIVES_IN_FRAME: ", Performance.RENDER_TOTAL_PRIMITIVES_IN_FRAME)
+	print("RENDER_TOTAL_DRAW_CALLS_IN_FRAME: ", Performance.RENDER_TOTAL_DRAW_CALLS_IN_FRAME)
+	print("RENDER_VIDEO_MEM_USED: ", Performance.RENDER_VIDEO_MEM_USED)
+	print("PHYSICS_2D_ACTIVE_OBJECTS: ", Performance.PHYSICS_2D_ACTIVE_OBJECTS)
+	print("PHYSICS_3D_ACTIVE_OBJECTS: ", Performance.PHYSICS_3D_ACTIVE_OBJECTS)
+	print("PHYSICS_3D_ISLAND_COUNT: ", Performance.PHYSICS_3D_ISLAND_COUNT)
+	print("Exemplo de leitura get_monitor(TIME_FPS): ", Performance.get_monitor(Performance.TIME_FPS))
+	print("Exemplo de leitura get_monitor(MEMORY_STATIC): ", Performance.get_monitor(Performance.MEMORY_STATIC))
+	quit(0)

@@ -1,0 +1,15 @@
+# Godot-specific ignores
+.godot/
+*.translation
+
+# Mono-specific ignores
+.mono/
+data_*/
+mono_crash.*.json
+
+# System / editor ignores
+*.tmp
+*.bak
+*~
+.DS_Store
+Thumbs.db

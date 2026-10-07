@@ -1,0 +1,7 @@
+# Pastas e arquivos gerados pelo Godot 4.x
+.godot/
+*.translation
+
+# Binários exportados (opcional para builds locais)
+builds/
+export/
