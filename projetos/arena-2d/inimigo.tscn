@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://inimigo.gd" id="1_script"]
+[ext_resource type="Resource" path="res://inimigo_padrao.tres" id="2_config"]
+[ext_resource type="Texture2D" path="res://icon.svg" id="3_texture"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1"]
+radius = 24.0
+
+[node name="Inimigo" type="Area2D" groups=["inimigos"]]
+script = ExtResource("1_script")
+config = ExtResource("2_config")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_texture")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+shape = SubResource("CircleShape2D_1")

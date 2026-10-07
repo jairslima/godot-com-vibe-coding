@@ -1,0 +1,8 @@
+# Normalizacao de quebras de linha para Git
+* text=auto eol=lf
+
+# Arquivos de texto do Godot Engine sempre com quebra LF
+*.gd text eol=lf
+*.tscn text eol=lf
+*.tres text eol=lf
+*.godot text eol=lf

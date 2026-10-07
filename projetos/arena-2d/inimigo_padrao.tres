@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="InimigoConfig" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://inimigo_config.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+nome = "Goblin Lanceiro"
+vida_maxima = 45
+velocidade = 140.0
+dano_contato = 12
+cor_modulacao = Color(0.9, 0.2, 0.2, 1)
