@@ -11,7 +11,7 @@
 # Nenhum.
 #
 # DEPENDÊNCIAS:
-# res://src/core/compliance_manager.gd e res://docs/PROVENANCE.md
+# res://src/core/compliance_manager.gd e res://tests/fixtures/PROVENANCE_exemplo.md
 #
 # VERSÃO TESTADA:
 # Godot 4.7.2.stable.official.ed1daf0bf no Windows 11
@@ -22,6 +22,9 @@
 
 extends SceneTree
 
+## Inventário FICTÍCIO usado só para demonstrar o auditor (o registro real do projeto está em docs/PROVENANCE.md).
+const PROVENANCE_EXEMPLO: String = "res://tests/fixtures/PROVENANCE_exemplo.md"
+
 const ComplianceManagerScript = preload("res://src/core/compliance_manager.gd")
 
 func _init() -> void:
@@ -31,7 +34,7 @@ func _init() -> void:
 	print("============================================================")
 	
 	var compliance = ComplianceManagerScript.new()
-	var relatorio_auditoria: Dictionary = compliance.auditar_provenance("res://docs/PROVENANCE.md")
+	var relatorio_auditoria: Dictionary = compliance.auditar_provenance(PROVENANCE_EXEMPLO)
 	
 	if not relatorio_auditoria["valido"]:
 		printerr("[FALHA CRÍTICA] Registro de procedência inválido ou com erros:")

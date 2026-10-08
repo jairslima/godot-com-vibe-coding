@@ -22,6 +22,9 @@
 
 extends Node
 
+## Inventário FICTÍCIO usado só para demonstrar o auditor (o registro real do projeto está em docs/PROVENANCE.md).
+const PROVENANCE_EXEMPLO: String = "res://tests/fixtures/PROVENANCE_exemplo.md"
+
 const ComplianceManagerScript = preload("res://src/core/compliance_manager.gd")
 
 func _ready() -> void:
@@ -36,8 +39,8 @@ func _ready() -> void:
 	assert(licenca.contains("Permission is hereby granted"), "Falha: O texto deve conter a cláusula padrão da licença MIT.")
 	print("[OK] Teste 1: Licença oficial do Godot Engine extraída com sucesso.")
 	
-	# Teste 2: Auditoria de procedência do PROVENANCE.md
-	var auditoria: Dictionary = manager.auditar_provenance("res://docs/PROVENANCE.md")
+	# Teste 2: Auditoria de procedência sobre o inventário de exemplo (fictício, com 8 ativos)
+	var auditoria: Dictionary = manager.auditar_provenance(PROVENANCE_EXEMPLO)
 	assert(auditoria["valido"] == true, "Falha: A auditoria do arquivo PROVENANCE.md deve ser válida.")
 	assert(auditoria["total_ativos"] == 8, "Falha: O total de ativos catalogados deve ser 8.")
 	assert(auditoria["pre_gerados"] == 2, "Falha: Devem constar exatamente 2 ativos com categoria pré-gerada.")

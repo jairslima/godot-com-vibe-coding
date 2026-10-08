@@ -11,7 +11,7 @@
 # Nenhum.
 #
 # DEPENDÊNCIAS:
-# res://src/core/license_manager.gd e res://assets/LICENSES.md
+# res://src/core/license_manager.gd, res://assets/LICENSES.md e res://tests/fixtures/LICENSES_exemplo.md
 #
 # VERSÃO TESTADA:
 # Godot 4.7.2.stable.official.ed1daf0bf no Windows 11
@@ -22,6 +22,9 @@
 # e encerra com código de saída 0.
 
 extends Node
+
+## Ledger FICTÍCIO usado só para demonstrar o auditor (o registro real do projeto está em assets/LICENSES.md).
+const LEDGER_EXEMPLO: String = "res://tests/fixtures/LICENSES_exemplo.md"
 
 const LicenseManagerScript = preload("res://src/core/license_manager.gd")
 
@@ -67,8 +70,8 @@ func _ready() -> void:
 		push_error("[TESTE 4/6 FALHOU] Falha ao carregar res://assets/LICENSES.md.")
 		falhas += 1
 	
-	# Teste 5: Auditoria estrutural e conformidade de status comercial do Ledger
-	var auditoria: Dictionary = manager.auditar_ledger()
+	# Teste 5: Auditoria estrutural do Ledger de exemplo (fictício, com 8 ativos)
+	var auditoria: Dictionary = manager.auditar_ledger(LEDGER_EXEMPLO)
 	if auditoria["valido"] and auditoria["total_assets"] >= 8 and auditoria["aprovados"] >= 8 and auditoria["erros"].size() == 0:
 		print("[TESTE 5/6 APROVADO] Auditoria do Asset Ledger: %d ativos aprovados, 0 erros e estrutura conforme." % auditoria["total_assets"])
 	else:
