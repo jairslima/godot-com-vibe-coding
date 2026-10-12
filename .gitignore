@@ -25,3 +25,8 @@ secrets.*
 *.log
 .~lock*
 __pycache__/
+
+# Seguranca - auditoria automatica
+credentials.*
+*.p12
+*.pfx
